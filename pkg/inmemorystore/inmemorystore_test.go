@@ -54,7 +54,7 @@ func TestClient_Get(t *testing.T) {
 		{testKey, testVal},
 		{testKey + "1", testVal + "1"},
 		{"", ErrEmptyKey},
-		{fmt.Sprint(time.Now().UnixNano()), ErrNotFoundKey},
+		{fmt.Sprint(time.Now().UnixNano()), ""},
 	}
 
 	client := NewClient()
@@ -69,9 +69,4 @@ func TestClient_Get(t *testing.T) {
 			mustEqual(t, err, nil)
 		}
 	}
-
-	cache = nil
-	val, err := client.GetFromMemory(testVal)
-	mustEqual(t, err, ErrNotFoundKey)
-	mustEqual(t, val, "")
 }

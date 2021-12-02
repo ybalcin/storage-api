@@ -17,9 +17,8 @@ func Serve() {
 
 	mux := http.NewServeMux()
 
-	mux.Handle("/db", port.Handler{H: httpPort.GetRecordsHandler, Method: http.MethodPost})
-	mux.Handle("in-memory/", port.Handler{H: httpPort.GetCacheEntryHandler, Method: http.MethodGet})
-	mux.Handle("/in-memory", port.Handler{H: httpPort.AddCacheEntryHandler, Method: http.MethodPost})
+	mux.Handle("/", port.Handler{H: httpPort.GetRecordsHandler, Methods: map[string]struct{}{http.MethodPost: {}}})
+	mux.Handle("/in-memory", port.Handler{H: httpPort.CacheEntryGroupHandler, Methods: map[string]struct{}{http.MethodGet: {}, http.MethodPost: {}}})
 
 	log.Printf("http server listening on port: %s", p)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", p), mux))

@@ -35,9 +35,8 @@ var (
 	lock  = sync.Mutex{}
 	cache = storage{}
 
-	ErrEmptyKey    = newPackageError("key is empty")
-	ErrEmptyValue  = newPackageError("value is empty")
-	ErrNotFoundKey = newPackageError("key not found")
+	ErrEmptyKey   = newPackageError("key is empty")
+	ErrEmptyValue = newPackageError("value is empty")
 )
 
 func newPackageError(message string) error {
@@ -82,7 +81,7 @@ func (c *client) GetFromMemory(key string) (string, error) {
 
 	val, ok := cache[key]
 	if !ok {
-		return "", ErrNotFoundKey
+		return "", nil
 	}
 
 	return val, nil

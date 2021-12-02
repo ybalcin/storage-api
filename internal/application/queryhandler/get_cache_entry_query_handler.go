@@ -18,6 +18,7 @@ type GetCacheEntryQueryHandler struct {
 	repo cache.Repository
 }
 
+// NewGetCacheEntryQueryHandler handles GetCacheEntryQuery
 func NewGetCacheEntryQueryHandler(repo cache.Repository) *GetCacheEntryQueryHandler {
 	return &GetCacheEntryQueryHandler{repo: repo}
 }
@@ -30,6 +31,10 @@ func (h *GetCacheEntryQueryHandler) Handle(q *GetCacheEntryQuery) (*GetCacheEntr
 	entry, err := h.repo.GetEntry(q.Key)
 	if err != nil {
 		return nil, err
+	}
+
+	if entry == nil {
+		return nil, nil
 	}
 
 	return &GetCacheEntryQueryResult{

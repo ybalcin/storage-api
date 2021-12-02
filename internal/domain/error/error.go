@@ -26,7 +26,7 @@ func NewDomainErrorBase(code code, message string) *DomainErrorBase {
 }
 
 func (e *DomainErrorBase) String() string {
-	return fmt.Sprintf("domain error occured with message: %s and code: %d", e.Message, e.Code)
+	return fmt.Sprintf("error occured with message: %s and code: %d", e.Message, e.Code)
 }
 
 func (e *DomainErrorBase) Int() int {

@@ -37,6 +37,7 @@ func (a *Application) Commands() *commands {
 // New initializes new application
 func New() *Application {
 	ctx := context.Background()
+	// from os env?
 	store := mgo.NewStore(ctx, "mongodb+srv://challengeUser:WUMglwNBaydH8Yvu@challenge-xzwqd.mongodb.net/getir-case-study?retryWrites=true", "getir-case-study")
 	inMemoryClient := inmemorystore.NewClient()
 

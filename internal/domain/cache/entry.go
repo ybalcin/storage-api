@@ -18,10 +18,6 @@ func NewEntry(key, value string) (*Entry, *error.DomainErrorBase) {
 		value: value,
 	}
 
-	if err := e.validate(); err != nil {
-		return nil, err
-	}
-
 	return e, nil
 }
 
@@ -33,16 +29,4 @@ func (e *Entry) Key() string {
 // Value returns value of entry
 func (e *Entry) Value() string {
 	return e.value
-}
-
-// validate validates entry
-func (e *Entry) validate() *error.DomainErrorBase {
-	if e.key == "" {
-		return error.NewDomainErrorBase(error.Invalid, "entry key is empty")
-	}
-	if e.value == "" {
-		return error.NewDomainErrorBase(error.Invalid, "entry value is empty")
-	}
-
-	return nil
 }

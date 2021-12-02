@@ -32,6 +32,10 @@ func (c *cacheInMemoryAdapter) GetEntry(key string) (*cache.Entry, *error.Domain
 		return nil, error.NewDomainErrorBase(error.Invalid, err.Error())
 	}
 
+	if val == "" {
+		return nil, nil
+	}
+
 	entry, domainErr := cache.NewEntry(key, val)
 	if domainErr != nil {
 		return nil, domainErr
